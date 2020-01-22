@@ -18,7 +18,24 @@ app.get('/', (request, response) => {
   response.send('Home Page!');
 });
 
-app.get('/location', (request, response) => {
+app.get('/location', locationHandler);
+
+app.get('/weather', weatherHandler);
+
+function Weather (time, forecast){
+  this.time = time;
+  this.forecast = forecast;
+}
+
+
+function Location (city, geoData) {
+  this.search_query = city;
+  this.formatted_query = geoData.display_name;
+  this.latitude = geoData.lat;
+  this.longitude = geoData.lon;
+}
+
+function locationHandler( request, response) {
   try {
     const city = request.query.city;
     let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.GEOCODE_API_KEY}&q=${city}&format=json&limit-1`;
@@ -35,39 +52,28 @@ app.get('/location', (request, response) => {
   catch(error) {
     errorHandler(error, request, response);
   }
-});
 
-app.get('/weather', (request, response) => {
+}
+
+function weatherHandler( request, response) {
   try {
     const weatherData = require('./data/darksky.json');
-    let weatherArr = [];
-    weatherData.daily.data.forEach(obj => {
-      console.log('obj.time:', obj.time);
+    let weatherArr = weatherData.daily.data.map(obj => {
       // Adreinne helped solve the time display issue
       let time = new Date(obj.time * 1000).toString().slice(0, 15);
-
-      weatherArr.push(new Weather(time, obj.summary));
+      return new Weather(time, obj.summary);
     });
+    // weatherData.daily.data.forEach(obj => {
+
+    //   weatherArr.push(new Weather(time, obj.summary));
+    // });
     response.send(weatherArr);
   }
   catch (error) {
     errorHandler(error, request, response);
   }
-
-});
-
-function Weather (time, forecast){
-  this.time = time;
-  this.forecast = forecast;
 }
 
-
-function Location (city, geoData) {
-  this.search_query = city;
-  this.formatted_query = geoData[0].display_name;
-  this.latitude = geoData[0].lat;
-  this.longitude = geoData[0].lon;
-}
 
 function errorHandler (error, request, response) {
   console.log('inside errorHandler');

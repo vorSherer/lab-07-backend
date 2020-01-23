@@ -87,15 +87,20 @@ function eventsHandler(request, response) {
   try {
     const lat = request.query.latitude;
     const lon = request.query.longitude;
-    const url = `http://api.eventful.com/json/events/search?app_key=${process.env.EVENTFUL_API_KEY}&location=${lat},${lon}&within=5&date=This+Week`;
+    const url = `http://api.eventful.com/json/events/search?app_key=${process.env.EVENTFUL_API_KEY}&location=${lat},${lon}&within=10&date=This+Week`;
     superagent.get(url)
       .then(data => {
-        console.log('Eventful Data: ', JSON.parse(data.text).events.event);
         const eventArr = JSON.parse(data.text).events.event;
-        let array = eventArr.map(event => {
+        console.log(eventArr);
+        // let count = 0;
+        let arrayEvents = eventArr.map(event => {
+          // if (count < 20) {
+          // count++;
           return new Event (event);
+          // }
         });
-        response.send(array);
+        // console.log(arrayEvents.length);
+        response.send(arrayEvents);
       });
   }
   catch(error) {

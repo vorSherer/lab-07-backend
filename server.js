@@ -3,7 +3,7 @@
 //load environment variables from the .env
 require('dotenv').config();
 
-//declare application dependancies
+//declare application dependencies
 const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
@@ -18,15 +18,11 @@ app.get('/', (request, response) => {
   response.send('Home Page!');
 });
 
+// Endpoint calls
 app.get('/location', locationHandler);
-
 app.get('/weather', weatherHandler);
 
-function Weather (time, forecast){
-  this.time = time;
-  this.forecast = forecast;
-}
-
+// Constructors
 
 function Location (city, geoData) {
   this.search_query = city;
@@ -35,6 +31,13 @@ function Location (city, geoData) {
   this.longitude = geoData.lon;
 }
 
+function Weather (time, forecast){
+  this.time = time;
+  this.forecast = forecast;
+}
+
+// Endpoint callback functions
+
 function locationHandler( request, response) {
   try {
     const city = request.query.city;
@@ -42,17 +45,13 @@ function locationHandler( request, response) {
     superagent.get(url)
       .then(data => {
         const geoData = data.body[0];
-        console.log(geoData);
         const locationData = new Location(city, geoData);
         response.send(locationData);
       });
-    // console.log('geoData: ', geoData);
-    // console.log('locationData', locationData);
   }
   catch(error) {
     errorHandler(error, request, response);
   }
-
 }
 
 function weatherHandler( request, response) {
@@ -63,10 +62,6 @@ function weatherHandler( request, response) {
       let time = new Date(obj.time * 1000).toString().slice(0, 15);
       return new Weather(time, obj.summary);
     });
-    // weatherData.daily.data.forEach(obj => {
-
-    //   weatherArr.push(new Weather(time, obj.summary));
-    // });
     response.send(weatherArr);
   }
   catch (error) {
@@ -74,10 +69,12 @@ function weatherHandler( request, response) {
   }
 }
 
+// Error Handler function
 
 function errorHandler (error, request, response) {
   console.log('inside errorHandler');
   response.status(500).send(error);
 }
+
 
 app.listen(PORT, () => console.log(`Server up on port ${PORT}`));

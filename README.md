@@ -93,15 +93,17 @@ Actual time needed to complete: 45 min.
 
 *****************************************************************************
 
-Number and name of feature: ________________________________
+Number and name of feature: Locations
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 5 min
 
-Start time: _____
+Start time: 6:40 pm
 
-Finish time: _____
+Finish time: 6:45 pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 5 min
+
+I had followed along in class when Greg did this demo so it was already complete when we got to it in lab 7
 
 *****************************************************************************
 

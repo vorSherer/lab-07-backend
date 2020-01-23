@@ -29,7 +29,7 @@ function Location (city, geoData) {
   this.longitude = geoData.lon;
 }
 
-function Weather (time, forecast){
+function Weather (time, forecast) {
   this.time = time;
   this.forecast = forecast;
 }
@@ -64,11 +64,8 @@ function weatherHandler(request, response) {
     const lat = request.query.latitude;
     const lon = request.query.longitude;
     const url = `https://api.darksky.net/forecast/${process.env.WEATHER_API_KEY}/${lat},${lon}`;
-    console.log('url: ', url);
     superagent.get(url)
       .then(data => {
-        // console.log('Dark Sky Data: ', data.body.daily.data);
-        // let weatherArr = url.daily.data.map(obj => {
         let weatherArr = data.body.daily.data.map(obj => {
           // Adreinne helped solve the time display issue
           let time = new Date(obj.time * 1000).toString().slice(0, 15);
@@ -87,19 +84,13 @@ function eventsHandler(request, response) {
   try {
     const lat = request.query.latitude;
     const lon = request.query.longitude;
-    const url = `http://api.eventful.com/json/events/search?app_key=${process.env.EVENTFUL_API_KEY}&location=${lat},${lon}&within=10&date=This+Week`;
+    const url = `http://api.eventful.com/json/events/search?app_key=${process.env.EVENTFUL_API_KEY}&location=${lat},${lon}&within=5&page_size=20&date=This+Week`;
     superagent.get(url)
       .then(data => {
         const eventArr = JSON.parse(data.text).events.event;
-        console.log(eventArr);
-        // let count = 0;
         let arrayEvents = eventArr.map(event => {
-          // if (count < 20) {
-          // count++;
           return new Event (event);
-          // }
         });
-        // console.log(arrayEvents.length);
         response.send(arrayEvents);
       });
   }

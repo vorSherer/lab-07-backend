@@ -107,15 +107,15 @@ I had followed along in class when Greg did this demo so it was already complete
 
 *****************************************************************************
 
-Number and name of feature: ________________________________
+Number and name of feature: Weather
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 60 min
 
-Start time: _____
+Start time: 6:50 pm
 
-Finish time: _____
+Finish time: 7:34 pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 44 min
 
 
 

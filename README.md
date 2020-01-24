@@ -1,7 +1,7 @@
 # City Explorer
 ## lab-06-backend
 
-**Author**: Clayton, (Lab 6) Tenaw, (Lab 7) Thomas S, 
+**Author**: Clayton, (Lab 6) Tenaw, (Lab 7) Thomas S, (Lab 8) nn
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Delpoyed site
@@ -15,7 +15,7 @@ Provides information to the user about a city of their choice, in order to prepa
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 - fork the repo
 - clone it down locally
-- run `npm i` in terminal from inside repo to install dependancies
+- run `npm i` in terminal from inside repo to install dependencies
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
@@ -127,5 +127,30 @@ Start time: 8:00 pm
 Finish time: 9:30 pm
 
 Actual time needed to complete: 1 hr 30 min
+
+*****************************************************************************
+### Lab 8
+
+Number and name of feature: _____________
+
+Estimate of time needed to complete: ________
+
+Start time: _______
+
+Finish time: _______
+
+Actual time needed to complete: ________
+
+*****************************************************************************
+
+Number and name of feature: _____________
+
+Estimate of time needed to complete: ________
+
+Start time: _______
+
+Finish time: _______
+
+Actual time needed to complete: ________
 
 
